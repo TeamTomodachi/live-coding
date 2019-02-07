@@ -62,7 +62,7 @@ to start:
   1. scss
      1. *: no margin or padding, border-box
      1. main:
-        1. width: 30vw
+        1. width: 35vw
         1. margin: 8em auto 0
         1. opacity 1
         1. transition: 150ms opacity ease-in-out
