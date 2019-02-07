@@ -44,11 +44,12 @@ to start:
      1. script index.js, div#app
    1. index.js
      1. import React, `{ render }`
-     1. state: text = '', author = ''
+     1. state: text = '', author = '', loading = true
      1. bound getQuote
+        1. `setState({ loading: true })`
         1. `await fetch('/quote')`
         1. check response ok
-        1. setState await `res.json()`
+        1. setState await `res.json()` + loading false
      1. render
         1. destructure state
         1. `if text && author`, content =
@@ -57,7 +58,8 @@ to start:
              1. cite author
         1. return main with condition 'hidden' class
         1. put content
-        1. `button#get-quote`, on click, getQuote
+        1. `button#get-quote`, on click getQuote, disabled = loading
+           1. text: loading ? Loading... : Get another
      1. render &lt;App /&gt;, `doc.getbyid('app')`
   1. scss
      1. *: no margin or padding, border-box
@@ -77,7 +79,12 @@ to start:
         1. font-style normal
         1. `&::before` content: '—'
      1. `button#get-quote`
-        1. fixed, left 2em top 1em
+        1. fixed, left 0.5em top 0.5em
+        1. no border, white bg
+        1. padding: 0.5rem, 1rem
+        1. font-size: 125%
+        1. `&:hover`: border 1px black
+        1. `&:active`: border-width: 1px 2px 2px 1px
 1. run parcel build
 1. show generated code
 

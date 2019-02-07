@@ -10,6 +10,7 @@ class App extends React.Component {
     this.state = {
       text: '',
       author: '',
+      loading: true,
     };
 
     this.getQuote = this.getQuote.bind(this);
@@ -20,6 +21,8 @@ class App extends React.Component {
   }
 
   async getQuote() {
+    this.setState({ loading: true });
+
     const response = await fetch('/quote');
     if (!response.ok) {
       throw new Error(`Failed to fetch resource: ${response.statusText}`);
@@ -27,11 +30,11 @@ class App extends React.Component {
 
     const { text, author } = await response.json();
 
-    this.setState({ text, author });
+    this.setState({ text, author, loading: false });
   }
 
   render() {
-    const { text, author } = this.state;
+    const { text, author, loading } = this.state;
 
     let visible;
     let content;
@@ -48,8 +51,12 @@ class App extends React.Component {
     return (
       <main className={visible || 'hidden'}>
         {content}
-        <button id="get-quote" onClick={this.getQuote}>
-          Get another
+        <button
+          id="get-quote"
+          onClick={this.getQuote}
+          disabled={loading}
+        >
+          {loading ? 'Loading...' : 'Get another'}
         </button>
       </main>
     );
