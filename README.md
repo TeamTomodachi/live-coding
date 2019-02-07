@@ -63,7 +63,7 @@ to start:
      1. *: no margin or padding, border-box
      1. main:
         1. width: 30vw
-        1. margin: 10em auto
+        1. margin: 8em auto 0
         1. opacity 1
         1. transition: 150ms opacity ease-in-out
         1. &.hidden opacity: 0
