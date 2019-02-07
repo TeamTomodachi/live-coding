@@ -1,0 +1,38 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+main {
+  width: 30vw;
+  margin: 10em auto;
+  opacity: 1;
+  transition: 150ms opacity ease-in-out;
+
+  &.hidden {
+    opacity: 0;
+  }
+}
+
+blockquote {
+  font-size: 300%;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+cite {
+  float: right;
+  font-style: normal;
+  font-size: 150%;
+
+  &::before {
+    content: '—';
+  }
+}
+
+button#get-quote {
+  position: fixed;
+  left: 2em;
+  top: 1em;
+}
