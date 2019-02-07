@@ -1,10 +1,15 @@
 # Live coding steps
 
+to start:
+
+1. npm install
+1. npm run start
+
 ## NPM package configuration
 
 1. make directory for project
-1. npm init
-1. add "browserslist": ["since 2017-06"] to package.json
+2. npm init
+3. add "browserslist": ["since 2017-06"] to package.json
 
 ## Node.js for back-end programming
 
