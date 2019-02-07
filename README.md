@@ -8,23 +8,23 @@ to start:
 ## NPM package configuration
 
 1. make directory for project
-2. npm init
-3. add "browserslist": ["since 2017-06"] to package.json
+1. npm init
+1. add "browserslist": ["since 2017-06"] to package.json
 
 ## Node.js for back-end programming
 
 1. install back-end packages
-  - koa
-  - koa-static
-  - koa-route
+  1. koa
+  1. koa-static
+  1. koa-route
 1. set up server
   1. import koa, koa-route, koa-static
   1. make new Koa()
   1. use static('dist')
   1. listen(8080)
 1. install fun quote packages
-  - get-random-quote
-  - pirate-speak
+  1. get-random-quote
+  1. pirate-speak
 1. add quote route
   1. import quote and { translate }
   1. async function
