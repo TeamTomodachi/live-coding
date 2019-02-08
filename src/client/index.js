@@ -1,66 +1,37 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { render } from 'react-dom';
-
 import './index.scss';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
+const getQuote = () => fetch('/quote').then(q => q.json());
 
-    this.state = {
-      text: '',
-      author: '',
-      loading: true,
-    };
+function App() {
+  const [{ text, author }, setQuote] = useState({ text: '', author: '' });
+  const [loading, setLoading] = useState(false);
+  useEffect(newQuote, []);
 
-    this.getQuote = this.getQuote.bind(this);
+  async function newQuote() {
+    setLoading(true);
+    setQuote(await getQuote());
+    setLoading(false);
   }
 
-  componentDidMount() {
-    this.getQuote();
-  }
-
-  async getQuote() {
-    this.setState({ loading: true });
-
-    const response = await fetch('/quote');
-    if (!response.ok) {
-      throw new Error(`Failed to fetch resource: ${response.statusText}`);
-    }
-
-    const { text, author } = await response.json();
-
-    this.setState({ text, author, loading: false });
-  }
-
-  render() {
-    const { text, author, loading } = this.state;
-
-    let visible;
-    let content;
-    if (text && author) {
-      visible = true;
-      content = (
+  return (
+    <main className={(text && author) || 'hidden'}>
+      {text && author && (
         <React.Fragment>
           <blockquote>{text}</blockquote>
           <cite>{author}</cite>
         </React.Fragment>
-      );
-    }
-
-    return (
-      <main className={visible || 'hidden'}>
-        {content}
-        <button
-          id="get-quote"
-          onClick={this.getQuote}
-          disabled={loading}
-        >
-          {loading ? 'Loading...' : 'Get another'}
-        </button>
-      </main>
-    );
-  }
+      )}
+      <button
+        id="get-quote"
+        onClick={newQuote}
+        disabled={loading}
+      >
+        {loading ? 'Loading...' : 'Get another'}
+      </button>
+    </main>
+  );
 }
 
 render(<App />, document.getElementById('app'));

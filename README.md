@@ -43,23 +43,21 @@ to start:
    1. index.html
      1. script index.js, div#app
    1. index.js
-     1. import React, `{ render }`
-     1. state: text = '', author = '', loading = true
-     1. bound getQuote
-        1. `setState({ loading: true })`
-        1. `await fetch('/quote')`
-        1. check response ok
-        1. setState await `res.json()` + loading false
-     1. render
-        1. destructure state
-        1. `if text && author`, content =
-           1. visible is true, fragment:
-             1. blockquote of text
-             1. cite author
-        1. return main with condition 'hidden' class
-        1. put content
-        1. `button#get-quote`, on click getQuote, disabled = loading
-           1. text: loading ? Loading... : Get another
+     1. import `React, { useEffect, useState }`, `{ render }`
+     1. getQuote = `() => fetch('/quote').then(q => q.json());`
+     1. state: quote: { text = '', author = '' } (destruct), loading = false
+     1. newQuote
+        1. `setLoading(true)`
+        1. `setQuote(await getQuote())`
+        1. `setLoading(false)`
+     1. return:
+        1. main `className={(text && author) || 'hidden'}`
+           1. text && author &&:
+              1. fragment
+                 1. blockquote of text
+                 1. cite author
+           1. button#get-quote, onClick={newQuote}, disabled={loading}
+              1. `{loading ? 'Loading...' : 'Get another'}`
      1. render &lt;App /&gt;, `doc.getbyid('app')`
   1. scss
      1. *: no margin or padding, border-box
